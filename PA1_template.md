@@ -1,8 +1,9 @@
-# Reproducible Research: Peer Assessment 1
-
-sets the default option to print the code/results unless otherwise specified
-```{r setoptions, echo = TRUE} opt_chunk$set(echo = TRUE, results ="asis")
-```
+---
+title: "Reproducible Research: Peer Assessment 1"
+output: 
+    html_document:
+      keep_md: true
+---
 
 ## Loading and preprocessing the data
 
@@ -69,7 +70,7 @@ head(Steps_PerDate)
 ## 6 2012-10-06      15420
 ```
 
-2. Make a histogram of the total number of steps taken each day
+2.Make a histogram of the total number of steps taken each day
 
 ```r
 #histogram
@@ -77,7 +78,7 @@ with(Steps_PerDate,hist(TotalSteps,xlab="total number of steps taken each day",
                         main="histogram of the total number of steps taken each day"))
 ```
 
-![](PA1_template_files/figure-html/unnamed-chunk-4-1.png) 
+![plot of chunk unnamed-chunk-4](figure/unnamed-chunk-4-1.png) 
 
 3.Calculate and report the mean and median of the total number of steps taken per day
 
@@ -123,7 +124,7 @@ head(Steps_PerInterval)
 with(Steps_PerInterval,plot(interval,AvgSteps,type="l"))
 ```
 
-![](PA1_template_files/figure-html/unnamed-chunk-6-1.png) 
+![plot of chunk unnamed-chunk-6](figure/unnamed-chunk-6-1.png) 
 
 2.Which 5-minute interval, on average across all the days in the dataset, contains the maximum number of steps?
 
@@ -223,7 +224,7 @@ with(Steps_PerDate_new,hist(TotalSteps,xlab="total number of steps taken each da
                             main="new histogram of the total number of steps taken each day"))
 ```
 
-![](PA1_template_files/figure-html/unnamed-chunk-11-1.png) 
+![plot of chunk unnamed-chunk-11](figure/unnamed-chunk-11-1.png) 
 
 ```r
 #Calculate and report the mean and median total number of steps taken per day
@@ -263,11 +264,12 @@ median_differ
 ## [1] -124
 ```
 
-Results:imputing missing data on the estimates of the total daily number of steps, decrease the mean by 16.4181874 and mediam by 124.
+**Results:**
+imputing missing data on the estimates of the total daily number of steps, decrease the mean by 16.4181874 and mediam by 124.
 
 ## Are there differences in activity patterns between weekdays and weekends?
 
-1.Create a new factor variable in the dataset with two levels ¬ñ ¬ìweekday¬î and ¬ìweekend¬î indicating whether a given date is a weekday or weekend day.
+1.Create a new factor variable in the dataset with two levels ‚<U+0080><U+0093> ‚<U+0080><U+009C>weekday‚<U+0080>ù and ‚<U+0080><U+009C>weekend‚<U+0080>ù indicating whether a given date is a weekday or weekend day.
 
 ```r
 data_new$weekdays <- weekdays(data_new$date)
@@ -322,7 +324,7 @@ library(lattice)
 xyplot(Avg_steps~interval|day_type,data=Steps_PerInterval_new,type="l",layout=c(1,2),ylab="Number of steps")
 ```
 
-![](PA1_template_files/figure-html/unnamed-chunk-13-1.png) 
+![plot of chunk unnamed-chunk-13](figure/unnamed-chunk-13-1.png) 
 
 <Done>
 
