@@ -1,15 +1,11 @@
----
-title: "Reproducible Research: Peer Assessment 1"
-output: 
-html_document:
-keep_md: true
----
+# Reproducible Research: Peer Assessment 1
 
 sets the default option to print the code/results unless otherwise specified
 ```{r setoptions, echo = TRUE} opt_chunk$set(echo = TRUE, results ="asis")
 ```
 
 ## Loading and preprocessing the data
+
 1.Load the data
 
 ```r
@@ -17,6 +13,7 @@ sets the default option to print the code/results unless otherwise specified
 setwd("C:/Users/Alan GZ Li/Desktop/R_File/Reproducible Research")
 data <- read.csv("./activity.csv",header = TRUE,na.strings="NA")
 ```
+
 2.Process/transform the data into a format suitable
 
 ```r
@@ -33,13 +30,31 @@ head(data)
 ## 5    NA 2012-10-01       20
 ## 6    NA 2012-10-01       25
 ```
+
 ## What is mean total number of steps taken per day?
 
 1.Calculate the total number of steps taken per day
 
 ```r
 library(sqldf)
+```
+
+```
+## Loading required package: gsubfn
+## Loading required package: proto
+## Loading required package: RSQLite
+## Loading required package: DBI
+```
+
+```r
 Steps_PerDate <- sqldf("select date,sum(steps) as TotalSteps from data group by date")
+```
+
+```
+## Loading required package: tcltk
+```
+
+```r
 Steps_PerDate$TotalSteps <- as.numeric(Steps_PerDate$TotalSteps)
 head(Steps_PerDate)
 ```
@@ -62,7 +77,7 @@ with(Steps_PerDate,hist(TotalSteps,xlab="total number of steps taken each day",
                         main="histogram of the total number of steps taken each day"))
 ```
 
-![plot of chunk unnamed-chunk-4](figure/unnamed-chunk-4-1.png) 
+![](PA1_template_files/figure-html/unnamed-chunk-4-1.png) 
 
 3.Calculate and report the mean and median of the total number of steps taken per day
 
@@ -108,7 +123,7 @@ head(Steps_PerInterval)
 with(Steps_PerInterval,plot(interval,AvgSteps,type="l"))
 ```
 
-![plot of chunk unnamed-chunk-6](figure/unnamed-chunk-6-1.png) 
+![](PA1_template_files/figure-html/unnamed-chunk-6-1.png) 
 
 2.Which 5-minute interval, on average across all the days in the dataset, contains the maximum number of steps?
 
@@ -208,7 +223,7 @@ with(Steps_PerDate_new,hist(TotalSteps,xlab="total number of steps taken each da
                             main="new histogram of the total number of steps taken each day"))
 ```
 
-![plot of chunk unnamed-chunk-11](figure/unnamed-chunk-11-1.png) 
+![](PA1_template_files/figure-html/unnamed-chunk-11-1.png) 
 
 ```r
 #Calculate and report the mean and median total number of steps taken per day
@@ -247,10 +262,12 @@ median_differ
 ```
 ## [1] -124
 ```
+
 Results:imputing missing data on the estimates of the total daily number of steps, decrease the mean by 16.4181874 and mediam by 124.
 
 ## Are there differences in activity patterns between weekdays and weekends?
-1.Create a new factor variable in the dataset with two levels – “weekday” and “weekend” indicating whether a given date is a weekday or weekend day.
+
+1.Create a new factor variable in the dataset with two levels  weekday and weekend indicating whether a given date is a weekday or weekend day.
 
 ```r
 data_new$weekdays <- weekdays(data_new$date)
@@ -305,6 +322,7 @@ library(lattice)
 xyplot(Avg_steps~interval|day_type,data=Steps_PerInterval_new,type="l",layout=c(1,2),ylab="Number of steps")
 ```
 
-![plot of chunk unnamed-chunk-13](figure/unnamed-chunk-13-1.png) 
+![](PA1_template_files/figure-html/unnamed-chunk-13-1.png) 
+
 <Done>
 

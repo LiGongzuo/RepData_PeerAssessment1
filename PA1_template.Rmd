@@ -10,17 +10,20 @@ sets the default option to print the code/results unless otherwise specified
 ```
 
 ## Loading and preprocessing the data
+
 1.Load the data
 ```{r }
 #the data should be in your working directory, you may use setwd()
 setwd("C:/Users/Alan GZ Li/Desktop/R_File/Reproducible Research")
 data <- read.csv("./activity.csv",header = TRUE,na.strings="NA")
 ```
+
 2.Process/transform the data into a format suitable
 ```{r }
 data$date <- as.Date(data$date)
 head(data)
 ```
+
 ## What is mean total number of steps taken per day?
 
 1.Calculate the total number of steps taken per day
@@ -106,9 +109,11 @@ mean_differ
 median_differ <- median_new-median
 median_differ
 ```
+
 Results:imputing missing data on the estimates of the total daily number of steps, decrease the mean by `r -mean_differ` and mediam by `r -median_differ`.
 
 ## Are there differences in activity patterns between weekdays and weekends?
+
 1.Create a new factor variable in the dataset with two levels – “weekday” and “weekend” indicating whether a given date is a weekday or weekend day.
 ```{r}
 data_new$weekdays <- weekdays(data_new$date)
@@ -127,5 +132,6 @@ head(Steps_PerInterval_new)
 library(lattice)
 xyplot(Avg_steps~interval|day_type,data=Steps_PerInterval_new,type="l",layout=c(1,2),ylab="Number of steps")
 ```
+
 <Done>
 
